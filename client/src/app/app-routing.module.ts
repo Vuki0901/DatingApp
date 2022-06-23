@@ -1,5 +1,8 @@
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { HomeComponent } from './home/home.component';
 import { ListsComponent } from './members/lists/lists.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
@@ -36,10 +39,21 @@ const routes: Routes = [
       },
     ]
   },
-
+  {
+    path: 'errors',
+    component: TestErrorsComponent,
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent,
+  },
+  {
+    path: 'server-error',
+    component: ServerErrorComponent,
+  },
   {
     path: '**',
-    component: HomeComponent,
+    component: NotFoundComponent,
     pathMatch: 'full'
   }
 ];
