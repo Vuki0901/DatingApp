@@ -32,4 +32,4 @@ public class UsersController : BaseApiController
     {
         return await _userRepository.GetMemberAsync(username);
     }
-}
+} 

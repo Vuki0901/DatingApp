@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, ReplaySubject } from 'rxjs';
@@ -18,14 +19,14 @@ export class AccountService {
   Podaci u service-ima se ne uklanjaju sve dok se aplikacija ne ugasi,
   dok se u komponentama brisu cim se korisnik makne iz te komponente
   */
-  baseUrl = "https://localhost:5001/api/account/";
+  baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
   login(model: any){
-    return this.http.post<User>(this.baseUrl + "login/", model).pipe(
+    return this.http.post<User>(this.baseUrl + "account/login/", model).pipe(
       map((response: User) => {
         const user = response;
         if(user) {
@@ -37,7 +38,7 @@ export class AccountService {
   }
 
   register(model: any){
-    return this.http.post<User>(this.baseUrl  + "register", model).pipe(
+    return this.http.post<User>(this.baseUrl  + "/account/register", model).pipe(
       map((user: User) => {
         if(user){
           localStorage.setItem('user', JSON.stringify(user));
