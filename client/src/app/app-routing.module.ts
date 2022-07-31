@@ -1,3 +1,4 @@
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NgModule } from '@angular/core';
@@ -9,6 +10,7 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MessagesComponent } from './members/messages/messages.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 
 const routes: Routes = [
   {
@@ -28,6 +30,11 @@ const routes: Routes = [
       {
         path: 'members/:username',
         component: MemberDetailComponent
+      },
+      {
+        path: 'member/edit',
+        component: MemberEditComponent,
+        canDeactivate: [PreventUnsavedChangesGuard],
       },
       {
         path: 'lists',
