@@ -24,19 +24,18 @@
 
       </ul>
 
-      <div class="dropwdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
-        <a id="basic-link" dropdownToggle (click)="false"
-           aria-controls="basic-link-dropdown ">
-           <p class="text-light">Welcome {{user.userName | titlecase}}</p>
-        </a>
+      <span dropdown *ngIf="(accountService.currentUser$ | async) as user">
+        <img src="{{user.photoUrl}}" alt="{{user.userName}}">
+        <a href id="basic-link" class="text-light p-3" dropdownToggle (click)="false"
+           aria-controls="basic-link-dropdown">Welcome {{user.userName | titlecase}}</a>
         <ul id="basic-link-dropdown" *dropdownMenu class="dropdown-menu"
             role="menu" aria-labelledby="basic-link">
           <li>
             <a class="dropdown-item" routerLink="/member/edit">Edit Profile</a>
-            <a class="dropdown-item" href="#" (click)="logout()">Logout</a>
+            <a class="dropdown-item" (click)="logout()">Logout</a>
           </li>
         </ul>
-      </div>
+      </span>
 
       <form *ngIf="(accountService.currentUser$ | async) === null" #loginForm="ngForm" class="d-flex" role="search" (submit)="login()" autocomplete="off">
         <input
